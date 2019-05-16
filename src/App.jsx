@@ -5,6 +5,7 @@ import { palette, typography } from './theme'
 import MainStore from "./stores/MainStore";
 import Routes from './routes/index';
 import './styles/index.css';
+import ErrorModal from "./components/ErrorModal";
 
 const theme = createMuiTheme({
     palette: palette,
@@ -32,6 +33,7 @@ class App extends Component {
     render() {
         return (
             <MuiThemeProvider theme={theme}>
+                <ErrorModal />
                 <Routes />
             </MuiThemeProvider>
         );

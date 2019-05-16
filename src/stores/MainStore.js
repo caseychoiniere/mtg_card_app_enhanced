@@ -5,6 +5,7 @@ import { checkStatus } from '../util/fetchUtil';
 export class MainStore {
     @observable anchorElements;
     @observable cards;
+    @observable errorModals;
     @observable loading;
     @observable orderBy;
     @observable page;
@@ -16,6 +17,7 @@ export class MainStore {
     constructor() {
         this.anchorElements = observable.map();
         this.cards = [];
+        this.errorModals = [];
         this.loading = false;
         this.orderBy = 'name';
         this.page = 1;
@@ -56,7 +58,19 @@ export class MainStore {
 
     @action handleErrors(er) {
         this.loading = false;
-        if (er.status === 401) localStorage.setItem('redirectUrl', window.location.href); // Todo: fix this function. No auth
+        this.errorModals.push({
+            error: er.message,
+            id: 'error' + Math.floor(Math.random() * 10000)
+        });
+    }
+
+    @action removeErrorModal(id) {
+        for (let i = 0; i < this.errorModals.length; i++) {
+            if (this.errorModals[i].id === id) {
+                this.errorModals.splice(i, 1);
+                break;
+            }
+        }
     }
 
     @action setSearchState() {
@@ -79,10 +93,6 @@ export class MainStore {
 
     @action setWindowWidth() {
         this.windowWidth = window.innerWidth;
-    }
-
-    @action toggleDrawer(key) {
-        !this.drawers.has(key) ? this.drawers.set(key, true) : this.drawers.delete(key);
     }
 
     @action toggleLoading() {
