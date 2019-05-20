@@ -68,7 +68,7 @@ export class MainStore {
         this.loading = false;
         this.errorModals.push({
             error: er.message,
-            id: 'error' + Math.floor(Math.random() * 10000)
+            id: this.generateUuid()
         });
     }
 
