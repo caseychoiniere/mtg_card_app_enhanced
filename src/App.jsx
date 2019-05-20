@@ -6,6 +6,7 @@ import MainStore from "./stores/MainStore";
 import Routes from './routes/index';
 import './styles/index.css';
 import ErrorModal from "./components/ErrorModal";
+import Typography from "@material-ui/core/Typography";
 
 const theme = createMuiTheme({
     palette: palette,

@@ -6,31 +6,39 @@ export class MainStore {
     @observable anchorElements;
     @observable cards;
     @observable errorModals;
+    @observable expandedCards;
+    @observable favoriteCards;
     @observable loading;
     @observable orderBy;
     @observable page;
     @observable query;
     @observable searching;
     @observable searchBy;
+    @observable showFavorites;
     @observable windowWidth;
 
     constructor() {
         this.anchorElements = observable.map();
         this.cards = [];
         this.errorModals = [];
+        this.expandedCards = observable.map();
+        this.favoriteCards = observable.map();
         this.loading = false;
         this.orderBy = 'name';
         this.page = 1;
         this.query = null;
         this.searching = false;
         this.searchBy = 'name';
+        this.showFavorites = false;
         this.windowWidth = 0;
     }
 
-    @action setAnchorElement(anchorEl, i) {
-        let a = this.anchorElements;
-        !a.has(i) ? a.set(i, anchorEl) : a.delete(i);
-        this.anchorElements = a;
+    @action addFavoriteCard(id, card) {
+        !this.favoriteCards.has(id) ? this.favoriteCards.set(id, card) : this.favoriteCards.delete(id);
+    }
+
+    @action expandCard(id) {
+        !this.expandedCards.has(id) ? this.expandedCards.set(id, true) : this.expandedCards.delete(id);
     }
 
     @action generateUuid() {
@@ -73,6 +81,12 @@ export class MainStore {
         }
     }
 
+    @action setAnchorElement(anchorEl, i) {
+        let a = this.anchorElements;
+        !a.has(i) ? a.set(i, anchorEl) : a.delete(i);
+        this.anchorElements = a;
+    }
+
     @action setSearchState() {
         this.cards = [];
         this.page = 1;
@@ -93,6 +107,10 @@ export class MainStore {
 
     @action setWindowWidth() {
         this.windowWidth = window.innerWidth;
+    }
+
+    @action showFavoriteCards() {
+        this.showFavorites = !this.showFavorites;
     }
 
     @action toggleLoading() {

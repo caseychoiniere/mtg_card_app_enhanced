@@ -15,6 +15,8 @@ class Colors {
     constructor() {
         this.white = '#fff';
         this.blue = '#298de1';
+        this.peach = '#ff7f66';
+        this.blue = '#298de1';
     }
 }
 

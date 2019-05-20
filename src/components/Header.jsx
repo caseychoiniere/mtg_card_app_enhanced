@@ -10,8 +10,12 @@ import AppBar from '@material-ui/core/AppBar';
 import { withStyles } from '@material-ui/core/styles';
 import Search from './Search';
 import SortCards from './SortCards';
+import ToggleFavorites from "./ToggleFavorites";
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
+
+import { unstable_Box as Box } from '@material-ui/core/Box';
+
 
 const theme = createMuiTheme({
     palette: palette,
@@ -44,10 +48,11 @@ class Header extends Component {
 
         return (
             <div>
-                <AppBar position="static"
+                <AppBar position="fixed"
                         style={styles.appBar}>
                     <Toolbar style={styles.toolbar}>
                         <SortCards />
+                        <ToggleFavorites />
                         {
                             windowWidth >= 500 &&
                             <Typography
