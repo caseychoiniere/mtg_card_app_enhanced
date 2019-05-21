@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 import { observer } from 'mobx-react';
 import { Color } from '../theme';
 import { createMuiTheme } from '@material-ui/core/styles';
@@ -10,6 +10,7 @@ import AppBar from '@material-ui/core/AppBar';
 import { withStyles } from '@material-ui/core/styles';
 import Search from './Search';
 import SortCards from './SortCards';
+import ToggleFavorites from "./ToggleFavorites";
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 
@@ -44,10 +45,12 @@ class Header extends Component {
 
         return (
             <div>
-                <AppBar position="static"
-                        style={styles.appBar}>
+                <AppBar position="fixed"
+                        style={styles.appBar}
+                >
                     <Toolbar style={styles.toolbar}>
                         <SortCards />
+                        <ToggleFavorites />
                         {
                             windowWidth >= 500 &&
                             <Typography

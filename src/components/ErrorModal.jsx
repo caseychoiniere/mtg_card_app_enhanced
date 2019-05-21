@@ -12,8 +12,11 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 @observer
 class ErrorModal extends Component {
 
-    handleClose = (id) => {
+    handleClose = (id, error) => {
+        let { page, query, orderBy, searchBy } = MainStore;
         MainStore.removeErrorModal(id);
+        // If 503 error (failed to fetch) then try again to fetch cards
+        if(error === 'Failed to fetch') MainStore.getCards(page, query, orderBy, searchBy);
     };
 
     getErrorMessage = (error) => {
@@ -31,6 +34,8 @@ class ErrorModal extends Component {
             case '503':
                 message = 'Service Unavailable. We are temporarily offline for maintenance. Please try again later';
                 break;
+            default:
+                message = 'An unknown error has occurred.';
         }
         return message;
     };
@@ -56,7 +61,7 @@ class ErrorModal extends Component {
                         </DialogContent>
                         <DialogActions>
                             <Button variant="outlined"
-                                    onClick={() => this.handleClose(m.id)}
+                                    onClick={() => this.handleClose(m.id, m.error)}
                                     color="primary"
                             >
                                 Dismiss
@@ -72,7 +77,11 @@ class ErrorModal extends Component {
 }
 
 ErrorModal.propTypes = {
-    errorModals: PropTypes.array
+    errorModals: PropTypes.array,
+    page: PropTypes.number,
+    query: PropTypes.string,
+    orderBy: PropTypes.string,
+    searchBy: PropTypes.string,
 };
 
 export default ErrorModal;

@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import { observer } from "mobx-react";
+import { observer } from 'mobx-react';
 import { withStyles} from '@material-ui/core/styles';
 import debounce from 'lodash.debounce';
-import MainStore from "../stores/MainStore";
+import MainStore from '../stores/MainStore';
+import Divider from '@material-ui/core/Divider';
 import Paper from '@material-ui/core/Paper';
 import InputBase from '@material-ui/core/InputBase';
-import Divider from '@material-ui/core/Divider';
-import SearchBySettings from "./SearchBySettings";
+import SearchBySettings from './SearchBySettings';
 
 const styles = {
     divider: {

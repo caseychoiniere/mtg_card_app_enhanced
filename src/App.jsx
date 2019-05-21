@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { observer } from 'mobx-react';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { palette, typography } from './theme'
-import MainStore from "./stores/MainStore";
+import MainStore from './stores/MainStore';
 import Routes from './routes/index';
 import './styles/index.css';
-import ErrorModal from "./components/ErrorModal";
+import ErrorModal from './components/ErrorModal';
 
 const theme = createMuiTheme({
     palette: palette,
