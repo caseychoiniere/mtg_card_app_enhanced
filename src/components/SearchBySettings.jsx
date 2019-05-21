@@ -1,16 +1,16 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import { observer } from "mobx-react";
+import { observer } from 'mobx-react';
 import {createMuiTheme, withStyles} from '@material-ui/core/styles';
-import {palette, typography} from "../theme";
-import MainStore from "../stores/MainStore";
-import FormControl from "@material-ui/core/FormControl";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import FormLabel from "@material-ui/core/FormLabel";
+import {palette, typography} from '../theme';
+import MainStore from '../stores/MainStore';
+import FormControl from '@material-ui/core/FormControl';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormLabel from '@material-ui/core/FormLabel';
 import IconButton from '@material-ui/core/IconButton';
-import Menu from "@material-ui/core/Menu";
-import Radio from "@material-ui/core/Radio";
-import RadioGroup from "@material-ui/core/RadioGroup";
+import Menu from '@material-ui/core/Menu';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
 import Settings from '@material-ui/icons/Settings';
 import ToolTip from '@material-ui/core/Tooltip';
 

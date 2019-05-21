@@ -1,41 +1,21 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { observer } from 'mobx-react';
-import {createMuiTheme, withStyles} from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import { Col, Row } from 'react-grid-system';
 import MainStore from '../stores/MainStore';
-import noImage from '../images/noImage.jpg';
-import {palette, typography} from "../theme";
 import Card from '@material-ui/core/Card';
 import CardControls from './CardControls';
 import CardDetails from "./CardDetails";
+import CardImage from "./CardImage";
 import CardInformation from "./CardInformation";
-import CardMedia from '@material-ui/core/CardMedia';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import InfiniteScroll from "react-infinite-scroll-component";
-import CardImage from "./CardImage";
-
-const theme = createMuiTheme({
-    palette: palette,
-    typography: typography
-});
+import Typography from '@material-ui/core/Typography';
 
 const styles = {
-    actions: {
-        display: 'flex',
-    },
     card: {
         margin: '14px 0px',
-    },
-    expand: {
-        transform: 'rotate(0deg)',
-        marginLeft: 'auto',
-        transition: theme.transitions.create('transform', {
-            duration: theme.transitions.duration.shortest,
-        }),
-    },
-    expandOpen: {
-        transform: 'rotate(180deg)',
     },
     progress: {
         zIndex: 3000,
@@ -43,11 +23,16 @@ const styles = {
         top: '50%',
         left: '50%',
         marginTop: -50,
-        marginLeft: -50
+        marginLeft: -50,
     },
     row: {
         marginLeft: 0,
         marginRight: 0,
+    },
+    typography: {
+        position: 'fixed',
+        top: '50%',
+        left: '33.3%',
     }
 };
 
@@ -76,7 +61,16 @@ class Cards extends Component {
             >
                 <Row style={styles.row}>
                     {loading && <CircularProgress color="secondary" size={80} className={classes.progress} />}
-                    {
+                    {   !cardList.length && showFavorites ?
+                        <Col md={12} >
+                            <Typography gutterBottom
+                                        variant="h6"
+                                        component="h6"
+                                        className={classes.typography}
+                            >
+                                You have no favorite cards saved. Add some to your list!
+                            </Typography>
+                        </Col> :
                         cardList.map(card => (
                             /*
                              * Using a function to generate a UUID for the key because there are a few
@@ -101,7 +95,9 @@ class Cards extends Component {
 Cards.propTypes = {
     loading: PropTypes.bool,
     cards: PropTypes.array,
-    classes: PropTypes.object
+    classes: PropTypes.object,
+    favoriteCards: PropTypes.object,
+    showFavorites: PropTypes.bool,
 };
 
 export default withStyles(styles)(Cards);

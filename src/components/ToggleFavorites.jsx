@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 import { observer } from 'mobx-react';
 import { withStyles } from '@material-ui/core/styles';
 import { Color } from '../theme';
 import MainStore from '../stores/MainStore'
-import FavoriteIcon from "@material-ui/icons/Favorite";
-import IconButton from "@material-ui/core/IconButton";
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import IconButton from '@material-ui/core/IconButton';
 import ToolTip from '@material-ui/core/Tooltip';
 
 const styles = {
@@ -26,12 +26,11 @@ class ToggleFavorites extends Component {
 
     render() {
         const { classes } = this.props;
-        const { favoriteCards, showFavorites } = MainStore;
+        const { showFavorites } = MainStore;
 
         return (
             <div>
                 {
-                     favoriteCards.size ?
                      <ToolTip title="Show Favorites">
                          <IconButton className={showFavorites ? classes.iconButtonActive : classes.iconButtonInactive}
                                      aria-label="Add to favorites"
@@ -39,8 +38,7 @@ class ToggleFavorites extends Component {
                          >
                              <FavoriteIcon/>
                          </IconButton>
-                     </ToolTip> :
-                     null
+                     </ToolTip>
                 }
             </div>
         );
@@ -49,7 +47,6 @@ class ToggleFavorites extends Component {
 
 ToggleFavorites.propTypes = {
     classes: PropTypes.object,
-    favoriteCards: PropTypes.object,
     showFavorites: PropTypes.bool,
 };
 

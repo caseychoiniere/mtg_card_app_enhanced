@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { observer } from 'mobx-react';
 import classnames from 'classnames';
-import {createMuiTheme, withStyles} from '@material-ui/core/styles';
+import { createMuiTheme, withStyles } from '@material-ui/core/styles';
 import MainStore from '../stores/MainStore';
-import {palette, typography} from "../theme";
+import { palette, typography } from "../theme";
 import CardActions from '@material-ui/core/CardActions';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import FavoriteIcon from '@material-ui/icons/Favorite';
@@ -48,9 +48,11 @@ class CardControls extends Component {
         const { expandedCards, favoriteCards } = MainStore;
 
         return (
-            <CardActions className={classes.actions} disableActionSpacing>
+            <CardActions className={classes.actions}
+                         disableActionSpacing
+            >
                 <ToolTip title="Add to Favorites">
-                    <IconButton color={favoriteCards.has(card.id) ? "secondary" : "disabled"}
+                    <IconButton color={favoriteCards.has(card.id) ? "secondary" : "default"}
                                 aria-label="Add to favorites"
                                 onClick={() => this.addFavoriteCard(card.id, card)}
                     >
@@ -76,7 +78,8 @@ class CardControls extends Component {
 
 CardControls.propTypes = {
     card: PropTypes.object,
-    classes: PropTypes.object
+    classes: PropTypes.object,
+    favoriteCards: PropTypes.object
 };
 
 export default withStyles(styles)(CardControls);

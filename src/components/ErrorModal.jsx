@@ -15,6 +15,7 @@ class ErrorModal extends Component {
     handleClose = (id, error) => {
         let { page, query, orderBy, searchBy } = MainStore;
         MainStore.removeErrorModal(id);
+        // If 503 error (failed to fetch) then try again to fetch cards
         if(error === 'Failed to fetch') MainStore.getCards(page, query, orderBy, searchBy);
     };
 
@@ -76,7 +77,11 @@ class ErrorModal extends Component {
 }
 
 ErrorModal.propTypes = {
-    errorModals: PropTypes.array
+    errorModals: PropTypes.array,
+    page: PropTypes.number,
+    query: PropTypes.string,
+    orderBy: PropTypes.string,
+    searchBy: PropTypes.string,
 };
 
 export default ErrorModal;

@@ -14,7 +14,10 @@ class CardDetails extends Component {
         const { expandedCards } = MainStore;
 
         return (
-            <Collapse in={expandedCards.has(card.id)} timeout="auto" unmountOnExit>
+            <Collapse in={expandedCards.has(card.id)}
+                      timeout="auto"
+                      unmountOnExit
+            >
                 <CardContent>
                     <Typography gutterBottom
                                 variant="h6"
@@ -22,7 +25,10 @@ class CardDetails extends Component {
                     >
                         Card Details
                     </Typography>
-                    <Typography paragraph>
+                    <Typography variant="subtitle2"
+                                component="p"
+                                color="textSecondary"
+                    >
                         {card.text}
                     </Typography>
                 </CardContent>
