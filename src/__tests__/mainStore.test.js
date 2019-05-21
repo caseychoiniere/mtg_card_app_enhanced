@@ -1,5 +1,3 @@
-import {action} from "mobx";
-
 describe('Main Store', () => {
 
     let api = null;
