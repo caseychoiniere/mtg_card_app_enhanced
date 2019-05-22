@@ -9,49 +9,44 @@ import CardControls from './CardControls';
 import CardDetails from "./CardDetails";
 import CardImage from "./CardImage";
 import CardInformation from "./CardInformation";
-import CircularProgress from '@material-ui/core/CircularProgress';
-import InfiniteScroll from "react-infinite-scroll-component";
+import Typography from '@material-ui/core/Typography';
 
 const styles = {
     card: {
         margin: '14px 0px',
     },
-    progress: {
-        zIndex: 3000,
-        position: 'fixed',
-        top: '50%',
-        left: '50%',
-        marginTop: -50,
-        marginLeft: -50,
-    },
     row: {
         marginLeft: 0,
         marginRight: 0,
     },
+    typography: {
+        position: 'fixed',
+        top: '50%',
+        left: '33.3%',
+    }
 };
 
 @observer
-class Cards extends Component {
-
-    fetchMoreCards = () => {
-        let { page, query, orderBy, searchBy } = MainStore;
-        MainStore.getCards(page, query, orderBy, searchBy);
-    };
+class Favorites extends Component {
 
     render() {
         const { classes } = this.props;
-        const { cards, loading } = MainStore;
+        const { favoriteCards, showFavorites } = MainStore;
 
         return (
-            <InfiniteScroll
-                dataLength={cards.length}
-                next={this.fetchMoreCards}
-                hasMore={true}
-            >
                 <Row style={styles.row}>
-                    {loading && <CircularProgress color="secondary" size={80} className={classes.progress} />}
                     {
-                        cards.map(card => (
+                        !favoriteCards.values().length && showFavorites ?
+                        <Col md={12} >
+                            <Typography gutterBottom
+                                        variant="h6"
+                                        component="h6"
+                                        className={classes.typography}
+                            >
+                                You have no favorite cards saved. Add some to your list!
+                            </Typography>
+                        </Col> :
+                        favoriteCards.values().map(card => (
                             /*
                              * Using a function to generate a UUID for the key because there are a few
                              * duplicate cards returned by the server which causes React duplicate key warnings
@@ -67,19 +62,14 @@ class Cards extends Component {
                         ))
                     }
                 </Row>
-            </InfiniteScroll>
         );
     }
 }
 
-Cards.propTypes = {
-    loading: PropTypes.bool,
-    cards: PropTypes.array,
+Favorites.propTypes = {
     classes: PropTypes.object,
-    page: PropTypes.number,
-    orderBy: PropTypes.string,
-    searchBy: PropTypes.string,
-    query: PropTypes.string,
+    favoriteCards: PropTypes.object,
+    showFavorites: PropTypes.bool,
 };
 
-export default withStyles(styles)(Cards);
+export default withStyles(styles)(Favorites);

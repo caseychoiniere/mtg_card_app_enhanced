@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { observer } from 'mobx-react';
 import { withStyles } from '@material-ui/core/styles';
@@ -22,6 +23,8 @@ class ToggleFavorites extends Component {
 
     showFavoriteCards = () => {
         MainStore.showFavoriteCards();
+        const route = MainStore.showFavorites ? '/favorites' : '/';
+        this.props.history.push(route)
     };
 
     render() {
@@ -50,4 +53,4 @@ ToggleFavorites.propTypes = {
     showFavorites: PropTypes.bool,
 };
 
-export default withStyles(styles)(ToggleFavorites);
+export default withRouter(withStyles(styles)(ToggleFavorites));
